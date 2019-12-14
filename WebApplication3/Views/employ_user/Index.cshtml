@@ -1,0 +1,179 @@
+﻿@model IEnumerable<WebApplication3.employ_user>
+
+@{
+    ViewBag.Title = "User List";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+    $(Document).ready(function () {
+
+        setTimeout(function () {
+            $('#alertMessage').hide('fade')
+        }, 7000);
+
+    });
+
+</script>
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .button {
+        border-radius: 10px;
+        background-color: aliceblue;
+        text-decoration-color: black;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 18px;
+        padding: 2px;
+        width: 180px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+</style>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (TempData["ErrMes"] != null)
+{
+    <script>
+
+        swal("@TempData["Action"].ToString()", "@TempData["ErrMes"].ToString()", "success");
+    </script>
+    <br />
+    <div id="alertMessage" class="alert alert-success">
+        <a id="linkClose" href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>@TempData["userName"].ToString() </strong><br />@TempData["Action"].ToString() @TempData["ErrMes"].ToString()
+    </div>
+}
+
+<h2>User List</h2>
+
+<button class="btn btn-default">
+
+    @Html.ActionLink("Add user", "Create")
+
+</button>
+@*class="table table-hover table table-striped table-bordered table-dark">*@
+<table class="table table-striped table-bordered" >
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <tr>
+        <th>
+            <p>User Name</p>
+            @*@Html.DisplayNameFor(model => model.name)*@
+        </th>
+        <th>
+            <p>User Password</p>
+            @*@Html.DisplayNameFor(model => model.Password)*@
+        </th>
+        <th>
+            <p>User Designation</p>
+            @*@Html.DisplayNameFor(model => model.Password)*@
+        </th>
+        <th>
+            <p>Create Date</p>
+            @*@Html.DisplayNameFor(model => model.date)*@
+        </th>
+        <th>
+            <p>User Department</p>
+            @*@Html.DisplayNameFor(model => model.department)*@
+        </th>
+        <th>
+            <p>Phone Number</p>
+            @*@Html.DisplayNameFor(model => model.phone)*@
+        </th>
+        <th>
+            <p>Email Adress</p>
+            @*@Html.DisplayNameFor(model => model.email)*@
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DesignationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.departmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css" />
+
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datapicker").datepicker();
+
+        })
+
+    </script>
+
+
+}
+
+
+
+
+

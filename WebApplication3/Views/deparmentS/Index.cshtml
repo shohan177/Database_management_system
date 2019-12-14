@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebApplication3.department>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Departments list</h3>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+<div class="container">
+
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Department</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <input type="text" name="Dpname" />
+                        <input type="submit" value="Insert" />
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<table class="table">
+    @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.departmentName)
+            </th>
+            <th></th>
+        </tr>*@
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.departmentName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.departmentId }) |
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.departmentId })
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,33 @@
+﻿@model WebApplication3.Models.ViewDatabaseList
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Database list </h2>
+<hr />
+@using (Html.BeginForm())
+{<div>
+        <table>
+            @for (int i = 0; i < Model.DatabaseList.Count; i++)
+            {
+                if (i % 1 == 0)
+                {
+                    @:<tr></tr>
+                }
+                <td>
+                    @Html.CheckBoxFor(Model => Model.DatabaseList[i].IsChecked)
+                    <label>@Model.DatabaseList[i].Name</label>
+                    @Html.HiddenFor(model => model.DatabaseList[i].Id)
+                    @Html.HiddenFor(model => model.DatabaseList[i].Name)
+
+                </td>
+            }
+        </table>
+
+    </div>
+    <br />
+    <input type="submit" value="Backup" class="btn btn-default" />
+}
+

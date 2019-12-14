@@ -1,0 +1,141 @@
+﻿@model WebApplication3.employ_user
+
+@{
+    ViewBag.Title = "Create";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+    $(Document).ready(function () {
+        $("#alertMas").click(function () {
+
+            if (confirm("Are you sure, we want to Add ?")) {
+                return true;
+            } else {
+                return false;
+
+            });
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+
+    });
+
+
+
+</script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+    @using (Html.BeginForm("Create", "employ_user", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal ">
+            <h4>Create a User</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group ">
+                @*@Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    User Name: @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    Password:  @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10 date" id='datetimepicker1'>
+                    Create Date:  @Html.EditorFor(model => model.date, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control datapicker" } })
+                    @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+
+
+                <div class="col-md-10">
+                    Department:  @Html.DropDownListFor(model => model.departmentId, new SelectList(ViewBag.dplist, "departmentId", "departmentName"), "select department", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.departmentId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    Phone:  @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    Email:   @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*degination dropdown*@
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    Designation:  @Html.DropDownListFor(model => model.DesignationId, new SelectList(ViewBag.dglist, "DesignationId", "DesignationName"), "select Designation", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DesignationId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" id="alertMas" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datapicker").datepicker({
+                dataFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true
+
+            });
+           
+
+        });
+
+    </script>
+    }

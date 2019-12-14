@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sql_mangeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="departments">
+          <Key>
+            <PropertyRef Name="departmentId" />
+          </Key>
+          <Property Name="departmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departmentName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Designations">
+          <Key>
+            <PropertyRef Name="DesignationId" />
+          </Key>
+          <Property Name="DesignationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DesignationName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="employ_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="date" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="Designation" Type="varchar" MaxLength="50" />
+          <Property Name="departmentId" Type="int" />
+          <Property Name="department" Type="varchar" MaxLength="50" />
+          <Property Name="DesignationId" Type="int" />
+        </EntityType>
+        <EntityType Name="userRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_employ_user_departments">
+          <End Role="departments" Type="Self.departments" Multiplicity="0..1" />
+          <End Role="employ_user" Type="Self.employ_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departments">
+              <PropertyRef Name="departmentId" />
+            </Principal>
+            <Dependent Role="employ_user">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employ_user_Designations">
+          <End Role="Designations" Type="Self.Designations" Multiplicity="0..1" />
+          <End Role="employ_user" Type="Self.employ_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designations">
+              <PropertyRef Name="DesignationId" />
+            </Principal>
+            <Dependent Role="employ_user">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userRole_userRole">
+          <End Role="employ_user" Type="Self.employ_user" Multiplicity="1" />
+          <End Role="userRole" Type="Self.userRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employ_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAllDatabaseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="sql_mangeModelStoreContainer">
+          <EntitySet Name="departments" EntityType="Self.departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Designations" EntityType="Self.Designations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employ_user" EntityType="Self.employ_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userRole" EntityType="Self.userRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_employ_user_departments" Association="Self.FK_employ_user_departments">
+            <End Role="departments" EntitySet="departments" />
+            <End Role="employ_user" EntitySet="employ_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employ_user_Designations" Association="Self.FK_employ_user_Designations">
+            <End Role="Designations" EntitySet="Designations" />
+            <End Role="employ_user" EntitySet="employ_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userRole_userRole" Association="Self.FK_userRole_userRole">
+            <End Role="employ_user" EntitySet="employ_user" />
+            <End Role="userRole" EntitySet="userRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sql_mangeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="employ_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="department" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="userRoles" Relationship="sql_mangeModel.FK_userRole_userRole" FromRole="employ_user" ToRole="userRole" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="departmentId" Type="Int32" />
+          <NavigationProperty Name="department1" Relationship="sql_mangeModel.FK_employ_user_departments" FromRole="employ_user" ToRole="department" />
+          <Property Name="DesignationId" Type="Int32" />
+          <NavigationProperty Name="Designation1" Relationship="sql_mangeModel.FK_employ_user_Designations" FromRole="employ_user" ToRole="Designation" />
+        </EntityType>
+        <EntityContainer Name="sql_mangeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="employ_user" EntityType="Self.employ_user" />
+          <EntitySet Name="userRoles" EntityType="sql_mangeModel.userRole" />
+          <AssociationSet Name="FK_userRole_userRole" Association="sql_mangeModel.FK_userRole_userRole">
+            <End Role="employ_user" EntitySet="employ_user" />
+            <End Role="userRole" EntitySet="userRoles" />
+          </AssociationSet>
+          <EntitySet Name="departments" EntityType="sql_mangeModel.department" />
+          <AssociationSet Name="FK_employ_user_departments" Association="sql_mangeModel.FK_employ_user_departments">
+            <End EntitySet="departments" Role="department" />
+            <End EntitySet="employ_user" Role="employ_user" />
+          </AssociationSet>
+          <EntitySet Name="Designations" EntityType="sql_mangeModel.Designation" />
+          <AssociationSet Name="FK_employ_user_Designations" Association="sql_mangeModel.FK_employ_user_Designations">
+            <End Role="Designation" EntitySet="Designations" />
+            <End Role="employ_user" EntitySet="employ_user" />
+          </AssociationSet>
+          <FunctionImport Name="GetAllDatabaseList" ReturnType="Collection(String)" />
+        </EntityContainer>
+        <EntityType Name="userRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="employ_user" Relationship="sql_mangeModel.FK_userRole_userRole" FromRole="userRole" ToRole="employ_user" />
+        </EntityType>
+        <Association Name="FK_userRole_userRole">
+          <End Type="sql_mangeModel.employ_user" Role="employ_user" Multiplicity="1" />
+          <End Type="sql_mangeModel.userRole" Role="userRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employ_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="departmentId" />
+          </Key>
+          <Property Name="departmentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="departmentName" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <NavigationProperty Name="employ_user" Relationship="sql_mangeModel.FK_employ_user_departments" FromRole="department" ToRole="employ_user" />
+        </EntityType>
+        <Association Name="FK_employ_user_departments">
+          <End Type="sql_mangeModel.department" Multiplicity="0..1" Role="department" />
+          <End Type="sql_mangeModel.employ_user" Multiplicity="*" Role="employ_user" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="departmentId" />
+            </Principal>
+            <Dependent Role="employ_user">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesignationId" />
+          </Key>
+          <Property Name="DesignationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DesignationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employ_user" Relationship="sql_mangeModel.FK_employ_user_Designations" FromRole="Designation" ToRole="employ_user" />
+        </EntityType>
+        <Association Name="FK_employ_user_Designations">
+          <End Type="sql_mangeModel.Designation" Role="Designation" Multiplicity="0..1" />
+          <End Type="sql_mangeModel.employ_user" Role="employ_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesignationId" />
+            </Principal>
+            <Dependent Role="employ_user">
+              <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sql_mangeModelStoreContainer" CdmEntityContainer="sql_mangeEntities">
+          <EntitySetMapping Name="employ_user">
+            <EntityTypeMapping TypeName="sql_mangeModel.employ_user">
+              <MappingFragment StoreEntitySet="employ_user">
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userRoles">
+            <EntityTypeMapping TypeName="sql_mangeModel.userRole">
+              <MappingFragment StoreEntitySet="userRole">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="sql_mangeModel.department">
+              <MappingFragment StoreEntitySet="departments">
+                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designations">
+            <EntityTypeMapping TypeName="sql_mangeModel.Designation">
+              <MappingFragment StoreEntitySet="Designations">
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllDatabaseList" FunctionName="sql_mangeModel.Store.GetAllDatabaseList"></FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

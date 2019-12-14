@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WebApplication3.Models.viewAllDatabase>
+@{
+    ViewBag.Title = "Index1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@using (Html.BeginForm())
+{
+<table>
+  <tr>
+      <th>
+         Database name
+      </th>
+  </tr>
+    @foreach (var item in Model)
+    {   <tr>
+            <td>
+                @Html.DisplayFor(model => item.Name)
+            </td>
+        </tr>
+    }
+
+    </table>
+    <input type="submit" value="Backup"/>
+}
+
+

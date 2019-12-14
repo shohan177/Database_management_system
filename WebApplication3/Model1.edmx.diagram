@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b109c29518d44575ac32a69733673e72" Name="Diagram1">
+        <EntityTypeShape EntityType="sql_mangeModel.employ_user" Width="4.25" PointX="0.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql_mangeModel.userRole" Width="1.5" PointX="5.75" PointY="1.125" />
+        <AssociationConnector Association="sql_mangeModel.FK_userRole_userRole" />
+        <EntityTypeShape EntityType="sql_mangeModel.department" PointX="4" PointY="5.375" Width="1.5" />
+        <AssociationConnector Association="sql_mangeModel.FK_employ_user_departments" />
+        <EntityTypeShape EntityType="sql_mangeModel.Designation" Width="1.5" PointX="0.75" PointY="5.875" />
+        <AssociationConnector Association="sql_mangeModel.FK_employ_user_Designations" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

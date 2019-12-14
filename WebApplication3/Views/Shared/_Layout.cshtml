@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> janata Bank Limited (@ViewBag.Title)</title>
+    @Styles.Render("~/Content/css")
+
+
+
+
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .body_layout {
+            background-image: url('../../image/body_background.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+
+
+</head>
+
+
+<body class="body_layout">
+
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("JB backup", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index1", "Home")</li>
+                        <li>@Html.ActionLink("Downlode Backup", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    System Management
+                                </a>
+                                <ul class="dropdown-menu ">
+
+
+                                    <li>@Html.ActionLink("Add user", "Create", "employ_user")</li>
+
+                                    <li>@Html.ActionLink("User List", "Index", "employ_user")</li>
+                                    <li>@Html.ActionLink("Add departmen", "Index", "deparmentS")</li>
+                                    <li>@Html.ActionLink("Add Designation", "Index", "DesignationS")</li>
+
+
+
+
+                                </ul>
+                            </li>
+                        }
+
+                    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="nav navbar-right">
+
+                        <div class="dropdown">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <button class="btn btn btn-danger ">
+
+                                        <span class="glyphicon glyphicon-cog"></span> Admin
+                                    </button>
+
+                                }
+                                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span> @User.Identity.Name
+
+                                </a>
+
+
+
+                                <ul class="dropdown-menu">
+
+                                    <li class="disabled"><a href="#">Report</a></li>
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="#">Settings</a></li>
+                                    <li>@Html.ActionLink("Logout", "Logout", "Account_mamber")</li>
+
+                                </ul>
+                            }
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    }
+
+    <div class="container body-content">
+        @RenderBody()
+        @*<hr />*@
+        @*<footer>
+                <p>&copy; @DateTime.Now.Year - Janata Bank Limited</p>
+            </footer>*@
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryun")
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
