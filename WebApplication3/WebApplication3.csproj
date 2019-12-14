@@ -228,13 +228,13 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="image\075947cd7ad84c38a558070e233808b5.gif" />
     <Content Include="image\49-499234_download-download-tbutton-png-small-transparent-png.png" />
     <Content Include="image\background.jpg" />
     <Content Include="image\blue background.jpg" />
     <Content Include="image\blue_abstract_background_310971.jpg" />
     <Content Include="image\bodybackground.png" />
     <Content Include="image\body_background.png" />
+    <Content Include="image\clipart-cloud-animated-gif-11.gif" />
     <Content Include="image\footer_bg.png" />
     <Content Include="image\image.jpg" />
     <Content Include="image\login background.png" />

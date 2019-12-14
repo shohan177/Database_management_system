@@ -13,10 +13,12 @@ namespace WebApplication3.Controllers
 
         // GET: DesignationS
         public ActionResult Index()
+        
         {
-            return View(db.Designations.ToList());
+           
+            return View(db.Designations.OrderByDescending(x=>x.DesignationName).ToList());
         }
-        public void save(string Dgname)
+        public void Save(string Dgname)
         {
           
        
@@ -28,26 +30,17 @@ namespace WebApplication3.Controllers
             return View();
         }
 
-        // GET: DesignationS/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
+        
         // POST: DesignationS/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public JsonResult Create(Designation Designation)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+           
+                    db.Designations.Add(Designation);
+                    db.SaveChanges();
+                     return Json(JsonRequestBehavior.AllowGet);
+                  
+               
         }
 
         // GET: DesignationS/Edit/5
@@ -72,26 +65,17 @@ namespace WebApplication3.Controllers
             }
         }
 
-        // GET: DesignationS/Delete/5
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: DesignationS/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            Designation Designation = db.Designations.Find(id);
+            db.Designations.Remove(Designation);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

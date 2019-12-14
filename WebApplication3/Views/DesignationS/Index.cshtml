@@ -33,8 +33,8 @@
                 </div>
                 <div class="modal-body">
                     <form method="post">
-                        <input type="text" name="Dgname"/>
-                        <input type="submit" value="Insert"/>
+                        <input type="text" name="Dgname" id="Dgfild"/>
+                        <input type="button" value="Insert" onclick="BtnClick()"/>
 
                     </form>
                 </div>
@@ -62,19 +62,48 @@
 
     @foreach (var item in Model)
     {
+        using (Html.BeginForm("Delete", "DesignationS", new { id = item.DesignationId }))
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DesignationName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.DesignationId }) |
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.DesignationId }) |
 
-                @Html.ActionLink("Delete", "Delete", new { id = item.DesignationId })
+                @Html.ActionLink("Delete", "Delete", new { id = item.DesignationId })*@
+                <input type="submit" value="Delete" onclick="return confirm('@item.DesignationName');" />
             </td>
         </tr>
+        }
     }
 
 </table>
+
+<script>
+    function BtnClick() {
+        var name = $("#Dgfild").val();
+        var obj = {
+            DesignationName: name
+        }
+        SaveForm(obj)
+    }
+    function SaveForm(obj) {
+        $.ajax({
+            url: "/DesignationS/Create",
+            method: "POST",
+            data: obj,
+            success: function (data) {
+                window.location ="/DesignationS/Index"
+            },
+            error: function (err) {
+                console.error(err)
+            }
+                
+        })
+
+    }
+</script>
 
 
 
