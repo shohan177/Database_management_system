@@ -5,12 +5,16 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication3.Models;
 using System.Web.Security;
+using System.Threading.Tasks;
 
 namespace WebApplication3.Controllers
 {
     [AllowAnonymous]
     public class Account_mamberController : Controller
     {
+        sql_mangeEntities db = new sql_mangeEntities();
+
+
         // GET: Account_mamber
         public ActionResult Login()
         {
@@ -30,7 +34,21 @@ namespace WebApplication3.Controllers
                     if (isValid )
                     {
                         FormsAuthentication.SetAuthCookie(model.name, false);
-                        return RedirectToAction("About", "Home");
+                    var logerIn = new LoginHistroy
+                    {
+                    
+                        username = model.name,
+                        Action = Request.ServerVariables["REMOTE_ADDR"],
+                         LoginTime = DateTime.UtcNow
+
+
+                    };
+                    db.LoginHistroy.Add(logerIn);
+                    db.SaveChanges();
+
+                    return RedirectToAction("About", "Home");
+                   
+                    
 
                     }
                     ModelState.AddModelError("", "Invalide user and password");
@@ -39,10 +57,26 @@ namespace WebApplication3.Controllers
 
             }
         
-        public ActionResult Logout()
+        public ActionResult Logout(member_login model)
         {
+           
+            var logerOut = new LoginHistroy
+            {
+
+                username = model.name,
+                                       Action = Request.ServerVariables["REMOTE_ADDR"],
+                LogoutTime = DateTime.UtcNow
+
+
+            };
+            db.LoginHistroy.Add(logerOut);
+            db.SaveChanges();
             FormsAuthentication.SignOut();
-            return RedirectToAction("About", "Home");
+
+
+            return RedirectToAction("Login", "Account_mamber");
+            
         }
+       
     }
 }

@@ -34,6 +34,16 @@
           <Property Name="department" Type="varchar" MaxLength="50" />
           <Property Name="DesignationId" Type="int" />
         </EntityType>
+        <EntityType Name="LoginHistroy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="LogoutTime" Type="datetime" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="userRole">
           <Key>
             <PropertyRef Name="id" />
@@ -83,6 +93,7 @@
           <EntitySet Name="departments" EntityType="Self.departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Designations" EntityType="Self.Designations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employ_user" EntityType="Self.employ_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginHistroy" EntityType="Self.LoginHistroy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userRole" EntityType="Self.userRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_employ_user_departments" Association="Self.FK_employ_user_departments">
             <End Role="departments" EntitySet="departments" />
@@ -137,6 +148,7 @@
             <End Role="employ_user" EntitySet="employ_user" />
           </AssociationSet>
           <FunctionImport Name="GetAllDatabaseList" ReturnType="Collection(String)" />
+          <EntitySet Name="LoginHistroy" EntityType="sql_mangeModel.LoginHistroy" />
         </EntityContainer>
         <EntityType Name="userRole">
           <Key>
@@ -199,6 +211,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LoginHistroy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LogoutTime" Type="DateTime" Precision="3" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -247,6 +269,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetAllDatabaseList" FunctionName="sql_mangeModel.Store.GetAllDatabaseList"></FunctionImportMapping>
+          <EntitySetMapping Name="LoginHistroy">
+            <EntityTypeMapping TypeName="sql_mangeModel.LoginHistroy">
+              <MappingFragment StoreEntitySet="LoginHistroy">
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

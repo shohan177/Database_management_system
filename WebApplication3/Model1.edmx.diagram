@@ -12,6 +12,7 @@
         <AssociationConnector Association="sql_mangeModel.FK_employ_user_departments" />
         <EntityTypeShape EntityType="sql_mangeModel.Designation" Width="1.5" PointX="0.75" PointY="5.875" />
         <AssociationConnector Association="sql_mangeModel.FK_employ_user_Designations" />
+        <EntityTypeShape EntityType="sql_mangeModel.LoginHistroy" Width="1.5" PointX="6.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

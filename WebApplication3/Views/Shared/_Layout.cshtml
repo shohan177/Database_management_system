@@ -42,7 +42,7 @@
                     </button>
                     @Html.ActionLink("JB backup", "Index1", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     <img src="~/image/clipart-cloud-animated-gif-11.gif" height="50" width="70" />
-                    
+
                 </div>
                 <div class="navbar-collapse collapse">
 
@@ -148,4 +148,31 @@
 
     @RenderSection("scripts", required: false)
 </body>
+
+
+
 </html>
+<script>
+    function BtnClick() {
+        var name = @User.Identity.Name;
+        var obj = {
+            name: name
+        }
+        SaveForm(obj)
+    }
+    function SaveForm(obj) {
+        $.ajax({
+            url: "/Account_mamber/Logout",
+            method: "POST",
+            data: obj,
+            success: function (data) {
+                window.location = "/Account_mamber/Login"
+            },
+            error: function (err) {
+                console.error(err)
+            }
+
+        })
+
+    }
+</script>

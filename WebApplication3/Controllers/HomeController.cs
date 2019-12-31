@@ -12,9 +12,10 @@ namespace WebApplication3.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        sql_mangeEntities db = new sql_mangeEntities();
         public ActionResult Index1()
         {
-            var items = Getfiles();
+     
             List<ViewAllDatabase> dl = new List<ViewAllDatabase>();
             dl.Add(new ViewAllDatabase() { Id = 1, Name = "master" });
             dl.Add(new ViewAllDatabase() { Id = 2, Name = "tempdb"});
@@ -32,8 +33,15 @@ namespace WebApplication3.Controllers
             return View(dataModel);
          
         }
+        public ActionResult GetDatabaseList()
+        {
+
+
+            var data = db.GetAllDatabaseList();
+            return View(data);
+        }
        
-            private List<string> Getfiles()
+    private List<string> Getfiles()
         {
             var dir = new System.IO.DirectoryInfo(Server.MapPath("~/App_Data"));
             System.IO.FileInfo[] filename = dir.GetFiles("*.*");

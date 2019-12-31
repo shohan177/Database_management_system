@@ -31,12 +31,11 @@ namespace WebApplication3
         public virtual DbSet<userRole> userRoles { get; set; }
         public virtual DbSet<department> departments { get; set; }
         public virtual DbSet<Designation> Designations { get; set; }
+        public virtual DbSet<LoginHistroy> LoginHistroy { get; set; }
     
         public virtual ObjectResult<string> GetAllDatabaseList()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetAllDatabaseList");
         }
-
-        public System.Data.Entity.DbSet<WebApplication3.Models.ViewAllDatabase> viewAllDatabases { get; set; }
     }
 }
