@@ -8,6 +8,7 @@ using WebApplication3.Models;
 
 namespace WebApplication3.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DeparmentSController : Controller
     {
         private sql_mangeEntities db = new sql_mangeEntities();

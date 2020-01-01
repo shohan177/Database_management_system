@@ -270,15 +270,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="App_Data\demo_back.bak" />
-    <Content Include="App_Data\employ_database.bak" />
-    <Content Include="App_Data\demo_back1.bak" />
     <Content Include="App_Data\employ_database2.bak" />
-    <Content Include="App_Data\demo_back13.bak" />
     <Content Include="App_Data\employ_database21.bak" />
-    <Content Include="App_Data\demo_back132.bak" />
     <Content Include="App_Data\employ_database212.bak" />
-    <Content Include="App_Data\demo_back1323.bak" />
     <Content Include="App_Data\employ_database2124.bak" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />

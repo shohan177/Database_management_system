@@ -9,7 +9,7 @@ using WebApplication3.Models;
 
 namespace WebApplication3.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         sql_mangeEntities db = new sql_mangeEntities();
@@ -25,6 +25,7 @@ namespace WebApplication3.Controllers
             dl.Add(new ViewAllDatabase() { Id = 6, Name = "ReportServerTempDB"});
             dl.Add(new ViewAllDatabase() { Id = 7, Name = "sql_mange"});
             dl.Add(new ViewAllDatabase() { Id = 8, Name = "EmployeDatabase"});
+           
             ViewDatabaseList dataModel = new ViewDatabaseList();
             dataModel.DatabaseList = dl;
 
@@ -33,6 +34,17 @@ namespace WebApplication3.Controllers
             return View(dataModel);
          
         }
+        [HttpPost]
+        public JsonResult CreatBackup(string dl)
+        {
+            string[] arr = dl.Split(',');
+            foreach(var Name in arr)
+            {
+                var currentID = Name;
+            }
+            return Json("currentID", JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetDatabaseList()
         {
 
@@ -60,6 +72,17 @@ namespace WebApplication3.Controllers
         }
         public ActionResult Index()
         {
+            List<ViewAllDatabase> dl = new List<ViewAllDatabase>();
+            dl.Add(new ViewAllDatabase() { Id = 1, Name = "master" });
+            dl.Add(new ViewAllDatabase() { Id = 2, Name = "tempdb" });
+            dl.Add(new ViewAllDatabase() { Id = 3, Name = "model" });
+            dl.Add(new ViewAllDatabase() { Id = 4, Name = "msdb" });
+            dl.Add(new ViewAllDatabase() { Id = 5, Name = "ReportServer" });
+            dl.Add(new ViewAllDatabase() { Id = 6, Name = "ReportServerTempDB" });
+            dl.Add(new ViewAllDatabase() { Id = 7, Name = "sql_mange" });
+            dl.Add(new ViewAllDatabase() { Id = 8, Name = "EmployeDatabase" });
+            ViewBag.dl = dl;
+
             var items = Getfiles();
             return View(items);
         }

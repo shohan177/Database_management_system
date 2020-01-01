@@ -2,13 +2,36 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<br/>
+<div class="col-md-3">
+    <ul class="" id="ItemList">
+      
+        @foreach (var item in ViewBag.dl) {
+            <li class="list-list-group-item">
+                <div class="checkbox">
+                    <input type="checkbox" id="Check©@item.Name" checked="@item.IsChecked"/>
+                    <label for="Check©@item.Name">@item.Name</label>
+
+                </div>
+            </li>
+            
+        }
+        @*<li class="iteam">
+            <a class="btn btn-success btn-block">Backup</a>
+        </li>*@
+
+    </ul>
+    <br/>
+    <a class="btn btn-success btn-block" onclick="BackupAction()" style="margin-left:9%">Create Backup</a>
+    <br/>
+</div>
 
 
 
 
 
-<div class="container">
-    <h3>Backup List of database</h3>
+<div class="">
+
     
     <table class="table table-hover">
         <thead>
@@ -33,5 +56,37 @@
     </table>
 </div>
 
+<script>
+    var BackupAction = function () {
+        var arrItem = [];
+        var commaSeparatedIds = "";
+        $("#ItemList li input[type=checkbox]").each(function (index, val) {
+            //debugger
+            var checkId = $(val).attr("Id");
+            var arr = checkId.split('©');
+            var currentCheckboxId = arr[1];
+            var Ischecked = $("#" + checkId).is(":checked", true);
+
+            if (Ischecked) {
+                arrItem.push(currentCheckboxId);
+            }
+
+        })
+        if (arrItem.length != 0) {
+            commaSeparatedIds = arrItem.toString();
+
+            $.ajax({
+                url:"/Home/CreatBackup",
+                type: "POST",
+                data: { dl:  commaSeparatedIds },
+                success: function (response) {
+                    //here 
+                }
+            })
+        }
+    }
+
+
+</script>
 
 

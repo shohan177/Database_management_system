@@ -34,17 +34,17 @@ namespace WebApplication3.Controllers
                     if (isValid )
                     {
                         FormsAuthentication.SetAuthCookie(model.name, false);
-                    var logerIn = new LoginHistroy
-                    {
+                    //var logerIn = new LoginHistroy
+                    //{
                     
-                        username = model.name,
-                        Action = Request.ServerVariables["REMOTE_ADDR"],
-                         LoginTime = DateTime.UtcNow
+                    //    username = model.name,
+                    //    Action = Request.ServerVariables["REMOTE_ADDR"],
+                    //     LoginTime = DateTime.UtcNow
 
 
-                    };
-                    db.LoginHistroy.Add(logerIn);
-                    db.SaveChanges();
+                    //};
+                    //db.LoginHistroy.Add(logerIn);
+                    //db.SaveChanges();
 
                     return RedirectToAction("About", "Home");
                    
@@ -60,17 +60,17 @@ namespace WebApplication3.Controllers
         public ActionResult Logout(member_login model)
         {
            
-            var logerOut = new LoginHistroy
-            {
+            //var logerOut = new LoginHistroy
+            //{
 
-                username = model.name,
-                                       Action = Request.ServerVariables["REMOTE_ADDR"],
-                LogoutTime = DateTime.UtcNow
+            //    username = model.name,
+            //                           Action = Request.ServerVariables["REMOTE_ADDR"],
+            //    LogoutTime = DateTime.UtcNow
 
 
-            };
-            db.LoginHistroy.Add(logerOut);
-            db.SaveChanges();
+            //};
+            //db.LoginHistroy.Add(logerOut);
+            //db.SaveChanges();
             FormsAuthentication.SignOut();
 
 
