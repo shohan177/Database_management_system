@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ using WebApplication3.Models;
 
 namespace WebApplication3.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         sql_mangeEntities db = new sql_mangeEntities();
@@ -40,9 +41,30 @@ namespace WebApplication3.Controllers
             string[] arr = dl.Split(',');
             foreach(var Name in arr)
             {
-                var currentID = Name;
+               var currentID = Name;
+                var dataTime = DateTime.Now.ToString("h;mm;ss");
+               
+                string dbPath = Server.MapPath("~/App_Data/"+ currentID + "_"+dataTime + ".bak");
+                using(var db = new sql_mangeEntities())
+                {
+                    try
+                    {
+                        var cmd = String.Format("BACKUP DATABASE {0} TO DISK='{1}' WITH FORMAT, MEDIANAME='DbBackups', MEDIADESCRIPTION='Media set for {0} database';"
+                , currentID, dbPath);
+                        db.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, cmd);
+                    }
+                    catch (Exception )
+                    {
+
+                      
+                    }
+                    
+                }
+                  
+              
+             
             }
-            return Json("currentID", JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetDatabaseList()

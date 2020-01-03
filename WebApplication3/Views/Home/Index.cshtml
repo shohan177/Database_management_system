@@ -3,6 +3,9 @@
     ViewBag.Title = "Home Page";
 }
 <br/>
+
+
+
 <div class="col-md-3">
     <ul class="" id="ItemList">
       
@@ -79,8 +82,8 @@
                 url:"/Home/CreatBackup",
                 type: "POST",
                 data: { dl:  commaSeparatedIds },
-                success: function (response) {
-                    //here 
+                success: function (data) {
+                   window.location.replace("/Home/Index");
                 }
             })
         }
