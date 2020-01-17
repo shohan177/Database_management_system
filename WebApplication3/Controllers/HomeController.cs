@@ -53,10 +53,13 @@ namespace WebApplication3.Controllers
                 , currentID, dbPath);
                         db.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, cmd);
                     }
-                    catch (Exception )
+                    catch (Exception m)
                     {
+                        ViewBag.err = m.Message;
+                        TempData["errorM"] = m.Message;
+                     
 
-                      
+
                     }
                     
                 }
@@ -64,6 +67,19 @@ namespace WebApplication3.Controllers
               
              
             }
+            if (ViewBag.err == null)
+            {
+                TempData["sucessMes"] = "Crete successfully";
+                TempData["Action"] = "Backup";
+            }
+            if (ViewBag.err != null)
+            {
+                TempData["EAction"] = "Faild !";
+                
+
+
+            }
+           
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
@@ -123,5 +139,6 @@ namespace WebApplication3.Controllers
 
             return View();
         }
+        
     }
 }

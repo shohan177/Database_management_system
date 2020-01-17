@@ -232,18 +232,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="image\49-499234_download-download-tbutton-png-small-transparent-png.png" />
-    <Content Include="image\background.jpg" />
-    <Content Include="image\blue background.jpg" />
-    <Content Include="image\blue_abstract_background_310971.jpg" />
-    <Content Include="image\bodybackground.png" />
+    <Content Include="image\81cab9_ce4a29f9ba69499fbdea5bf8ec9e75f7_mv2.gif" />
+    <Content Include="image\backup-restore.png" />
     <Content Include="image\body_background.png" />
     <Content Include="image\clipart-cloud-animated-gif-11.gif" />
-    <Content Include="image\footer_bg.png" />
-    <Content Include="image\image.jpg" />
+    <Content Include="image\InsistentTautGodwit-small.gif" />
+    <Content Include="image\loader.gif" />
     <Content Include="image\login background.png" />
     <Content Include="image\login background2.png" />
     <Content Include="image\MarriedMarvelousHawaiianmonkseal-size_restricted.gif" />
-    <Content Include="image\nav-background.jpg" />
+    <Content Include="image\source.gif" />
     <Content Include="image\top-nav-background-image-v1 %281%29.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

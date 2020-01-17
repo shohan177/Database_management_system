@@ -2,38 +2,103 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .loder {
+        height: 100%;
+        width: 100%;
+        margin-top:-100%;
+        margin-left:190%;
+        display:none;
+       
+    }
+</style>
+
 <br/>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+    $(Document).ready(function () {
+
+        setTimeout(function () {
+            $('#alertMessage').hide('fade')
+        }, 9000);
+
+    });
+
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (TempData["sucessMes"] != null)
+{
+    <script>
+
+                swal("@TempData["Action"].ToString()", "@TempData["sucessMes"].ToString()", "success");
+    </script>
+}
+
+@if (TempData["EAction"] != null)
+{
+    <script>
+
+                swal("@TempData["EAction"].ToString()", "Something error while creating backup, check details", "error");
+    </script>
+    <div id="alertMessage" class="alert alert-danger">
+        <a id="linkClose" href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Faild!! </strong><br />@TempData["errorM"].ToString()
+    </div>
+}
 
 
 
-<div class="col-md-3">
-    <ul class="" id="ItemList">
-      
-        @foreach (var item in ViewBag.dl) {
-            <li class="list-list-group-item">
-                <div class="checkbox">
-                    <input type="checkbox" id="Check©@item.Name" checked="@item.IsChecked"/>
-                    <label for="Check©@item.Name">@item.Name</label>
 
-                </div>
-            </li>
-            
-        }
-        @*<li class="iteam">
-            <a class="btn btn-success btn-block">Backup</a>
-        </li>*@
+<div class="col-md-15 w3-container w3-card w3-white w3-margin-bottom">
+    <div class="col-md-3">
+        <ul class="" id="ItemList">
 
-    </ul>
-    <br/>
-    <a class="btn btn-success btn-block" onclick="BackupAction()" style="margin-left:9%">Create Backup</a>
-    <br/>
+            @foreach (var item in ViewBag.dl)
+            {
+                <li class="list-list-group-item">
+                    <div class="checkbox">
+                        <input type="checkbox" id="Check©@item.Name" checked="@item.IsChecked" />
+                        <label for="Check©@item.Name">@item.Name</label>
+
+                    </div>
+                </li>
+
+            }
+            @*<li class="iteam">
+                    <a class="btn btn-success btn-block">Backup</a>
+                </li>*@
+
+        </ul>
+        <br />
+
+
+   
+         
+            <img class="loder" src="~/image/81cab9_ce4a29f9ba69499fbdea5bf8ec9e75f7_mv2.gif" />
+        
+        <a class="btn btn-success btn-block" onclick="BackupAction()">Create Backup</a>
+       
+        <br />
+
+    </div>
+   
 </div>
 
 
 
 
 
-<div class="">
+<div class="w3-container w3-card w3-white w3-margin-bottom">
+   
 
     
     <table class="table table-hover">
@@ -59,7 +124,15 @@
     </table>
 </div>
 
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
 <script>
+    //view folder
+
+    //create backup action
     var BackupAction = function () {
         var arrItem = [];
         var commaSeparatedIds = "";
@@ -81,9 +154,16 @@
             $.ajax({
                 url:"/Home/CreatBackup",
                 type: "POST",
-                data: { dl:  commaSeparatedIds },
+                data: { dl: commaSeparatedIds },
+                beforeSend: function () {
+                    $('.loder').show();
+                },
                 success: function (data) {
-                   window.location.replace("/Home/Index");
+
+                    window.location.replace("/Home/Index");
+                    $('.loder').hide();
+                    
+                
                 }
             })
         }
