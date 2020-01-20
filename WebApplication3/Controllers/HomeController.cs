@@ -110,6 +110,7 @@ namespace WebApplication3.Controllers
         }
         public ActionResult Index()
         {
+           
             List<ViewAllDatabase> dl = new List<ViewAllDatabase>();
             dl.Add(new ViewAllDatabase() { Id = 1, Name = "master" });
             dl.Add(new ViewAllDatabase() { Id = 2, Name = "tempdb" });
@@ -120,11 +121,12 @@ namespace WebApplication3.Controllers
             dl.Add(new ViewAllDatabase() { Id = 7, Name = "sql_mange" });
             dl.Add(new ViewAllDatabase() { Id = 8, Name = "EmployeDatabase" });
             ViewBag.dl = dl;
+            //var files = GetfilesModel.GetAllFiles();
 
             var items = Getfiles();
             return View(items);
         }
-        
+
 
         public ActionResult About()
         {
@@ -139,6 +141,16 @@ namespace WebApplication3.Controllers
 
             return View();
         }
-        
+        //public JsonResult Downlode(string filename) {
+        //    string path = Server.MapPath("~/App_Data");
+        //    string fileName = Path.GetFileName(filename);
+
+        //    string fullPath = Path.Combine(path, fileName);
+           
+
+          
+        //}
+
+
     }
 }

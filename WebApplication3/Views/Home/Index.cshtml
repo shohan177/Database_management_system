@@ -105,7 +105,7 @@
         <thead>
             <tr>
                 <th>Database Name</th>
-                <th>Lastname</th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -114,8 +114,8 @@
             {
                 <tr>
                     <td>@Model[i].ToString()</td>
-                    <td>something</td>
-                    <td><input type="image" src="~/image/49-499234_download-download-tbutton-png-small-transparent-png.png" alt="Submit" width="20" height="20"></td>
+                    <td></td>
+                    <td><button onclick="Donwlode()"  type="submit" id="kk" value="@Model[i].ToString()">Downlode</button></td>
                 </tr>
 
             }
@@ -168,8 +168,27 @@
             })
         }
     }
+    
+   
+    function Donwlode() {
+        var uniqueName = $("#kk").val();
+        var url = "http://50168/api/FilesData/DownloadFile?uniqueName=" + uniqueName
+        window.open(url);
+        //$.ajax({
+        //    url: "/Home/Downlode",
+        //    type: "POST",
+        //    data: { uniqueName: name },
+        //    success: function (data) {
+
+
+        //    }
+        //})
+
+    }
+        
 
 
 </script>
 
 
+  
